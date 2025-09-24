@@ -1,0 +1,18 @@
+class Solution:
+    def fractionToDecimal(self, numerator: int, denominator: int) -> str:
+        if numerator % denominator == 0:
+            return str(numerator // denominator)
+        res = "-" if (numerator < 0) ^ (denominator < 0) else ""
+        numerator, denominator = abs(numerator), abs(denominator)
+        res += str(numerator // denominator) + "."
+        rem = numerator % denominator
+        seen = {}
+        while rem:
+            if rem in seen:
+                res = res[:seen[rem]] + "(" + res[seen[rem]:] + ")"
+                break
+            seen[rem] = len(res)
+            rem *= 10
+            res += str(rem // denominator)
+            rem %= denominator
+        return res
