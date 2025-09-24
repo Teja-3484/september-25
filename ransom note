@@ -1,0 +1,31 @@
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        n = len(ransomNote)
+        m = len(magazine)
+        d = {}
+        for ch in magazine:
+            if ch in d:
+                d[ch] += 1
+            else:
+                d[ch] = 1
+        if n < m:
+            for i in range(0, n):
+                if ransomNote[i] in d and d[ransomNote[i]] > 0:
+                    d[ransomNote[i]] -= 1
+                else:
+                    return False
+            return True
+        elif m < n:
+            for i in range(0, n):
+                if ransomNote[i] in d and d[ransomNote[i]] > 0:
+                    d[ransomNote[i]] -= 1
+                else:
+                    return False
+            return True
+        else:
+            for i in range(0, n):
+                if ransomNote[i] in d and d[ransomNote[i]] > 0:
+                    d[ransomNote[i]] -= 1
+                else:
+                    return False
+            return True
